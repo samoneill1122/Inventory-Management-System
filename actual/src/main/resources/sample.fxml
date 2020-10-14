@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1079.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+  <tabs>
+    <Tab text="Current Stock">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="Search">
+                                 <HBox.margin>
+                                    <Insets top="4.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="searchBar" promptText="e.g. Hilti..." />
+                              <Button fx:id="showUnserviced" mnemonicParsing="false" onAction="#toggleShowAllUnservicedTools" text="Show All Unserviced" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <TableView fx:id="toolTable" prefHeight="197.0" prefWidth="964.0">
+                           <columns>
+                              <TableColumn fx:id="idCol" prefWidth="70.0" text="Id" />
+                              <TableColumn fx:id="brandNameCol" prefWidth="115.0" text="Brand Name" />
+                              <TableColumn fx:id="typeCol" prefWidth="106.0" text="Type" />
+                              <TableColumn fx:id="modelCol" prefWidth="117.0" text="Model" />
+                              <TableColumn fx:id="descriptionCol" prefWidth="291.0" text="Description" />
+                              <TableColumn fx:id="costPriceCol" prefWidth="85.0" text="Cost Price" />
+                              <TableColumn fx:id="askingPriceCol" prefWidth="89.0" text="Asking Price" />
+                              <TableColumn fx:id="servicedCol" prefWidth="89.0" text="Serviced" />
+                           </columns>
+                        </TableView>
+                        <Label text="ADD TOOL">
+                           <padding>
+                              <Insets left="10.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <HBox spacing="10.0">
+                           <children>
+                              <TextField fx:id="bnInput" promptText="Brand Name" />
+                              <TextField fx:id="typeInput" promptText="Tool Type" />
+                              <TextField fx:id="modelInput" promptText="Model" />
+                              <TextField fx:id="descInput" promptText="Description" />
+                              <TextField fx:id="cpInput" prefHeight="25.0" prefWidth="67.0" promptText="Cost Price" />
+                              <TextField fx:id="apInput" prefHeight="25.0" prefWidth="67.0" promptText="Asking Price" />
+                              <Label text="Serviced">
+                                 <HBox.margin>
+                                    <Insets top="3.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <CheckBox fx:id="servInput" mnemonicParsing="false" prefHeight="17.0" prefWidth="0.0">
+                                 <HBox.margin>
+                                    <Insets top="2.0" />
+                                 </HBox.margin>
+                              </CheckBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#addButtonClicked" text="Add Tool" />
+                              <Text fx:id="errorMessage" fill="#d70d0d" strokeType="OUTSIDE" strokeWidth="0.0" text="Output" visible="false">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" />
+                           </padding>
+                        </HBox>
+                        <Separator />
+                        <SplitPane fx:id="splitPane" dividerPositions="0.4994110718492344">
+                          <items>
+                            <AnchorPane fx:id="toolsSoldPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="MARK TOOLS AS SOLD" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font></Label>
+                                    <HBox spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="28.0">
+                                       <children>
+                                          <TextField fx:id="sellingPriceInput" promptText="Selling Price" />
+                                          <Button mnemonicParsing="false" onAction="#markToolsAsSold" text="Mark As Sold" />
+                                       </children>
+                                    </HBox>
+                                    <Text fx:id="soldErrorMessage" fill="#dd0909" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="60.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </AnchorPane>
+                            <AnchorPane fx:id="otherOpsPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="OTHER OPERATIONS" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font></Label>
+                                    <HBox spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#deleteButtonClicked" text="Delete Tool" />
+                                          <Button mnemonicParsing="false" onAction="#toggleToolsServiced" text="Toggle Serviced" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                        <Separator />
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Sold Stock">
+      <content>
+        <AnchorPane>
+               <children>
+                  <VBox>
+                     <children>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="Search">
+                                 <HBox.margin>
+                                    <Insets top="4.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="searchBar1" promptText="e.g. Hilti..." />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <TableView fx:id="toolTableSold" prefHeight="249.0" prefWidth="964.0">
+                           <columns>
+                              <TableColumn fx:id="idCol1" text="Id" />
+                              <TableColumn fx:id="brandNameCol1" prefWidth="125.0" text="Brand Name" />
+                              <TableColumn fx:id="typeCol1" prefWidth="121.0" text="Type" />
+                              <TableColumn fx:id="modelCol1" prefWidth="166.0" text="Model" />
+                              <TableColumn fx:id="costPriceCol1" prefWidth="77.0" text="Cost Price" />
+                              <TableColumn fx:id="sellingPriceCol1" prefWidth="89.0" text="Selling Price" />
+                              <TableColumn fx:id="customerCol" prefWidth="180.0" text="Customer" />
+                              <TableColumn fx:id="phoneNumberCol" prefWidth="125.0" text="Phone Number" />
+                           </columns>
+                        </TableView>
+                        <SplitPane fx:id="splitPane2" dividerPositions="0.5" prefHeight="269.0" prefWidth="851.0">
+                          <items>
+                            <AnchorPane fx:id="statsPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="STATS" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <VBox AnchorPane.topAnchor="35.0">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label text="Total Profit:" />
+                                                <Text fx:id="totalProfitOutput" strokeType="OUTSIDE" strokeWidth="0.0" text="Output" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label text="Tools Sold:" />
+                                                <Text fx:id="totalSoldOutput" strokeType="OUTSIDE" strokeWidth="0.0" text="Output">
+                                                   <HBox.margin>
+                                                      <Insets left="3.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label text="Best Selling Brand:" />
+                                                <Text fx:id="bestSellingBrandOutput" strokeType="OUTSIDE" strokeWidth="0.0" text="Output">
+                                                   <HBox.margin>
+                                                      <Insets left="3.0" />
+                                                   </HBox.margin>
+                                                </Text>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </padding>
+                                          </HBox>
+                                           <HBox spacing="10.0">
+                                               <children>
+                                                   <Label text="Best Selling Tool:" />
+                                                   <Text fx:id="bestSellingToolOutput" strokeType="OUTSIDE" strokeWidth="0.0" text="Output">
+                                                       <HBox.margin>
+                                                           <Insets left="3.0" />
+                                                       </HBox.margin>
+                                                   </Text>
+                                               </children>
+                                               <padding>
+                                                   <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                               </padding>
+                                           </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane fx:id="customerPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="SET CUSTOMER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <TextField fx:id="customerNameInput" promptText="Name" />
+                                          <TextField fx:id="phoneNumberInput" promptText="Phone Number" />
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="setCustomerButton" mnemonicParsing="false" onAction="#submitCustomer" text="Submit" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="74.0" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
